@@ -38,7 +38,7 @@ The nonlinear dynamics are linearized into an error-based state-space form for c
 - Implemented a PID lateral controller that computes steering angle *δ* by minimizing cross-track and heading errors relative to the reference trajectory.
 - Implemented a PID longitudinal controller that regulates vehicle speed by controlling the driving force *F*.
 
-<!-- YOUTUBE: dQw4w9WgXcQ -->
+<!-- YOUTUBE: XI6pwMaaLHI -->
 
 ---
 
@@ -54,7 +54,7 @@ The nonlinear dynamics are linearized into an error-based state-space form for c
 - Replaced pole placement with a discrete-time infinite-horizon LQR controller for the lateral dynamics.
 - Implemented the A* search algorithm for real-time path re-planning to overtake a slower vehicle on the track.
 
-<!-- YOUTUBE: dQw4w9WgXcQ -->
+<!-- YOUTUBE: g6Iq03A9Es8 -->
 
 ---
 
@@ -63,4 +63,4 @@ The nonlinear dynamics are linearized into an error-based state-space form for c
 - Implement Extended Kalman Filter Simultaneous Localization and Mapping (EKF SLAM) to control the vehicle without relying on direct GPS-based position and heading.
 - Reused the LQR lateral + PID longitudinal controller, to operate on the EKF-estimated states instead of ground-truth sensor readings.
 
-<!-- YOUTUBE: dQw4w9WgXcQ -->
+<!-- YOUTUBE: z4rxKnDlzhI -->
