@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css_js/style.css">
 </head>
 <body>
 
@@ -19,7 +19,7 @@
     <div class="nav-bar__right">
       <a href="index.html" class="active">home</a>
       <a href="Vaibhav Parekh_Resume.pdf" target="_blank">resume</a>
-      <a href="#projects">research & projects</a>
+      <a href="#projects">projects</a>
 
       <span class="nav-bar__divider">|</span>
 
@@ -181,37 +181,7 @@
 
   </main>
 
-  <!-- Script for animated border -->
-  <script>
-    function initBorders() {
-      var r = 15;
-      document.querySelectorAll('.proj-card').forEach(function(card) {
-        var w = card.offsetWidth;
-        var h = card.offsetHeight;
-        var svg = card.querySelector('.proj-card__border');
-        var p   = svg.querySelector('path');
-
-        svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
-
-        // Rounded rect starting from center of left edge, clockwise
-        p.setAttribute('d',
-          'M 0 ' + h/2 +
-          ' L 0 ' + (h - r) +
-          ' Q 0 ' + h + ' ' + r + ' ' + h +
-          ' L ' + (w - r) + ' ' + h +
-          ' Q ' + w + ' ' + h + ' ' + w + ' ' + (h - r) +
-          ' L ' + w + ' ' + r +
-          ' Q ' + w + ' 0 ' + (w - r) + ' 0' +
-          ' L ' + r + ' 0' +
-          ' Q 0 0 0 ' + r +
-          ' L 0 ' + h/2
-        );
-      });
-    }
-
-    window.addEventListener('load', initBorders);
-    window.addEventListener('resize', initBorders);
-  </script>
+  <script src="css_js/main.js"></script>
 
 </body>
 </html>
