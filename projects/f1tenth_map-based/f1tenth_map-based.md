@@ -1,4 +1,4 @@
-# F1-Tenth Autonomous Racing: Map-based Navigation
+# F1-Tenth Autonomous Racing: Map-based Navigation | [GitHub](https://github.com/vaibhavparekh9/f1tenth_autonomous_racing)
 
 **Association:** Carnegie Mellon University  
 **Course:** 16-663: F1-Tenth Autonomous Racing
