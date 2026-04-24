@@ -24,26 +24,38 @@ function initBorders() {
   });
 }
 
-window.addEventListener('load', initBorders);
-window.addEventListener('resize', initBorders);
+window.addEventListener('load', function() {
+  if (document.querySelector('.proj-card')) initBorders();
+});
+window.addEventListener('resize', function() {
+  if (document.querySelector('.proj-card')) initBorders();
+});
 
 /* ---------- Active nav link on scroll ---------- */
 (function() {
-  var navLinks = document.querySelectorAll('.nav-bar__right > a[href]');
-  var sections = {};
+  var navLinks = document.querySelectorAll('.nav-bar__right > a.nav-bar__text-link');
+  if (!navLinks.length) return;
 
+  var sections = {};
   navLinks.forEach(function(link) {
-    var href = link.getAttribute('href');
-    if (href.charAt(0) === '#') {
-      var target = document.getElementById(href.substring(1));
-      if (target) sections[href] = { el: target, link: link };
+    var href = link.getAttribute('href') || '';
+    var hashIdx = href.indexOf('#');
+    if (hashIdx !== -1) {
+      var id = href.substring(hashIdx + 1);
+      var target = document.getElementById(id);
+      if (target) sections['#' + id] = { el: target, link: link };
     }
   });
 
-  var homeLink = document.querySelector('.nav-bar__right > a[href="index.html"]')
-              || document.querySelector('.nav-bar__right > a[href="/"]');
+  var homeLink = document.querySelector('.nav-bar__text-link[href="index.html"]')
+    || document.querySelector('.nav-bar__text-link[href="/"]')
+    || document.querySelector('.nav-bar__text-link[href="../index.html"]');
+
+  var hasInPageAnchors = Object.keys(sections).length > 0;
 
   function updateActive() {
+    if (!hasInPageAnchors) return;
+
     var scrollY = window.scrollY || window.pageYOffset;
     var activeLink = homeLink;
 

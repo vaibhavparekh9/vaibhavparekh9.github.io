@@ -5,9 +5,10 @@
 }
 
 body {
-  font-family: "Ubuntu Mono", monospace;
+  font-family: "Open Sans", sans-serif;
   color: #2b2b2b;
   text-align: justify;
+  letter-spacing: 0.08em;
 }
 
 a {
@@ -17,6 +18,7 @@ a {
 
 /* ---------- Top navigation bar ---------- */
 .nav-bar {
+  font-family: "Noto Sans Mono", monospace;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -26,10 +28,11 @@ a {
   position: sticky;
   top: 0;
   z-index: 100;
+  perspective: 1000px;
 }
 
 .nav-bar__name {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 600;
   letter-spacing: 0.5px;
 }
@@ -41,10 +44,14 @@ a {
 }
 
 .nav-bar__right > a {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   letter-spacing: 0.5px;
   padding: 0.25rem 0;
   transition: opacity 0.2s;
+}
+
+.nav-bar__right > a.nav-bar__text-link {
+  display: inline-block;
 }
 
 .nav-bar__right > a:hover {
@@ -52,7 +59,12 @@ a {
 }
 
 .nav-bar__right > a.active {
-  border-bottom: 2px solid #2b2b2b;
+  color: #c41230;
+  opacity: 1;
+}
+
+.nav-bar__right > a.active:hover {
+  opacity: 0.85;
 }
 
 .nav-bar__divider {
@@ -87,8 +99,15 @@ a {
 }
 
 .intro__text {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   line-height: 1.6;
+}
+
+.intro__greeting {
+  font-family: "Noto Sans Mono", monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
 }
 
 /* ---------- Accent color ---------- */
@@ -173,7 +192,7 @@ a {
 
 /* ---------- Section heading ---------- */
 .section-heading {
-  font-size: 2.0rem;
+  font-size: 1.8rem;
   font-weight: 700;
   margin-top: 1rem;
   margin-bottom: 1.5rem;
@@ -233,14 +252,16 @@ a {
 }
 
 .proj-card__title {
-  font-size: 1.1rem;
-  font-weight: 900;
+  font-family: "Noto Sans Mono", monospace;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  font-weight: 800;
   margin-bottom: 0.3rem;
   text-align: left;
 }
 
 .proj-card__body p {
-  font-size: 1.1rem;
+  font-size: 1.0rem;
   line-height: 1.5;
 }
 
