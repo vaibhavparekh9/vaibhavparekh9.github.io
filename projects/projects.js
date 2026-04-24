@@ -20,6 +20,15 @@
         }
       });
 
+      // Same for links: from projects.html, bare "file.pdf" would wrongly resolve to projects/file.pdf
+      el.querySelectorAll('a[href]').forEach(function(a) {
+        var h = a.getAttribute('href');
+        if (!h || /^(?:https?:|mailto:|tel:|#)/i.test(h) || h.startsWith('/')) return;
+        if (h.startsWith(project + '/')) return;
+        if (h.startsWith('../') || h.startsWith('./')) return;
+        a.setAttribute('href', project + '/' + h);
+      });
+
       // Set page title from first h1
       var h1 = el.querySelector('h1');
       if (h1) document.title = h1.textContent + ' - Vaibhav Parekh';
