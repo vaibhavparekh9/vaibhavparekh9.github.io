@@ -1,3 +1,26 @@
+/* ---------- Project tag colors ---------- */
+var TAG_COLORS = {
+  'Computer Vision':  '#a8d8ea',
+  Learning:           '#d5a6e6',
+  Navigation:         '#a8e6cf',
+  SLAM:               '#f9d89c',
+  Controls:           '#f4a7a3',
+  CAD:                '#c8c8c8',
+  'Mechanical Design':'#b8c9e8',
+  Manufacturing:      '#e8c4a0'
+};
+
+function initTags() {
+  document.querySelectorAll('.proj-tag').forEach(function(el) {
+    var key = el.getAttribute('data-tag');
+    if (key && TAG_COLORS[key]) {
+      el.style.backgroundColor = TAG_COLORS[key];
+    }
+  });
+}
+
+window.addEventListener('load', initTags);
+
 /* ---------- Animated project card borders ---------- */
 function initBorders() {
   var r = 15;

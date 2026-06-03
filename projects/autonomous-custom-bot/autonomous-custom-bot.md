@@ -16,6 +16,7 @@ This project serves as a basic framework for visual SLAM and navigation, and can
 **Hardware:** Custom mecanum-drive robot (SolidWorks CAD), Intel RealSense D435  
 
 <p align="center"><img src="images/rviz.gif" height="460"> <img src="images/bot.jpeg" height="460"> <img src="images/gazebo.gif" height="460"></p>
+<p align="center"><em>Fig. RViz (left); Physical Robot Prototype (center); Gazebo Simulation (right)</em></p>
 
 ## Robot Description
 
