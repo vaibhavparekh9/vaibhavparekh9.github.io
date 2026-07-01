@@ -21,6 +21,37 @@ function initTags() {
 
 window.addEventListener('load', initTags);
 
+/* ---------- Mobile hamburger menu ---------- */
+(function() {
+  var btn = document.querySelector('.nav-bar__hamburger');
+  if (!btn) return;
+  var nav = btn.closest('.nav-bar');
+  var menu = nav.querySelector('.nav-bar__menu');
+
+  function setOpen(open) {
+    nav.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    setOpen(!nav.classList.contains('open'));
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!nav.classList.contains('open')) return;
+    if (menu && menu.contains(e.target)) return;
+    setOpen(false);
+  });
+
+  nav.querySelectorAll('.nav-bar__right a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      setOpen(false);
+    });
+  });
+})();
+
 /* ---------- Animated project card borders ---------- */
 function initBorders() {
   var r = 15;
@@ -71,6 +102,7 @@ window.addEventListener('resize', function() {
   });
 
   var homeLink = document.querySelector('.nav-bar__text-link[href="index.html"]')
+    || document.querySelector('.nav-bar__text-link[href="/index.html"]')
     || document.querySelector('.nav-bar__text-link[href="/"]')
     || document.querySelector('.nav-bar__text-link[href="../index.html"]');
 

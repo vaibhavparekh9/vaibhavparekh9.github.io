@@ -81,7 +81,8 @@
 }
 
 .md-rendered img {
-  max-width: 100%;
+  max-width: 100% !important;
+  height: auto !important;
   border-radius: 5px;
   margin: 1rem 0;
 }
@@ -184,6 +185,30 @@
 }
 
 @media (max-width: 768px) {
+  /* Ensure mobile nav matches the home page */
+  .nav-bar__menu {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .nav-bar__hamburger {
+    display: flex !important;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .nav-bar:not(.open) .nav-bar__right {
+    display: none !important;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .nav-bar.open .nav-bar__right {
+    display: flex !important;
+    pointer-events: auto;
+    visibility: visible;
+  }
+
   .md-beside {
     flex-direction: column;
   }

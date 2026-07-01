@@ -19,7 +19,7 @@ We learn dense, view-invariant descriptors without any keypoint annotations, ext
 
 ## Methodology
 
-<p align="center"><img src="images/flowchart.png" width="600"></p>
+<p align="center"><img src="images/flowchart.png" style="width:100%;max-width:600px"></p>
 
 ### DVE Transitive Matching
 
@@ -29,7 +29,7 @@ A stacked Hourglass CNN maps each pixel to a point in 64-D embedding space, wher
 
 ### Visibility-Aware Loss
 
-<p align="center"><img src="images/vis_aware_loss.png" width="600"></p>
+<p align="center"><img src="images/vis_aware_loss.png" style="width:100%;max-width:600px"></p>
 
 - The standard DVE loss normalizes over all H×W pixels, assuming every pixel to have a valid correspondence.
 - But in real multi-view pairs, self-occluded and out-of-bounds pixels have no valid match.
@@ -42,17 +42,17 @@ A stacked Hourglass CNN maps each pixel to a point in 64-D embedding space, wher
 ### Qualitative Results
 
 Intra-instance Keypoint Correspondence
-<p align="center"><img src="images/intra_instance.png" width="600"></p>
+<p align="center"><img src="images/intra_instance.png" style="width:100%;max-width:600px"></p>
 Cross-instance Keypoint Correspondence
-<p align="center"><img src="images/cross_instance.png" width="600"></p>
+<p align="center"><img src="images/cross_instance.png" style="width:100%;max-width:600px"></p>
 
 ### Quantitative Results
 
-<p align="center"><img src="images/plot1.png" width="450"></p>
+<p align="center"><img src="images/plot1.png" style="width:100%;max-width:450px"></p>
 
 DVE successfully transfers from simpler facial data to real multi-view car data, with **PCK@10 of 82.8% for intra- and 69.5% for cross-instance** correspondence.
 
-<p align="center"><img src="images/plot2.png" width="450"></p>
+<p align="center"><img src="images/plot2.png" style="width:100%;max-width:450px"></p>
 
 The intra- to cross-instance ratio of 1.5× suggests the DVE **mechanism generalizes effectively** across car instances despite the harder domain.
 

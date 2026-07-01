@@ -13,7 +13,7 @@
 
 Team Eta is a student-led SAE Supermileage/Shell Eco-marathon team. These competitions are among the world's leading energy-efficiency programs, where students design, build, and test fuel-efficient cars, pushing the boundaries of what is technically possible.
 
-<p align="center"><img src="images/yugant.jpg" width="400"></p>
+<p align="center"><img src="images/yugant.jpg" style="width:100%;max-width:400px"></p>
 <p align="center"><em>Fig. CAD render of Yugant prototype</em></p>
 
 ---
@@ -39,11 +39,11 @@ Manufacturing the vehicle body of Yugant was a full-team effort. The process can
 - **Manufacturing the mold:** Chopped strand mat glass fiber was cured to form the mold, then sanded and polished for smoothness.
 - **Manufacturing the body:** A Lantor Soric core sandwiched between carbon fiber formed the final vehicle body, built using vacuum infusion at an industrial aerospace composites facility.
 
-<p align="center"><img src="images/pattern.jpg" height="250"> <img src="images/curing.jpg" height="250"> <img src="images/body.jpg" height="250"></p>
+<p align="center"><img src="images/pattern.jpg" style="height:auto;max-height:250px;max-width:30%"> <img src="images/curing.jpg" style="height:auto;max-height:250px;max-width:30%"> <img src="images/body.jpg" style="height:auto;max-height:250px;max-width:30%"></p>
 
 <p align="center"><em>Fig. MDF pattern template (left); Preparing the mold for curing (center); Finished carbon fiber body (right)</em></p>
 
-<p align="center"><img src="images/team.jpg" width="600"></p>
+<p align="center"><img src="images/team.jpg" style="width:100%;max-width:600px"></p>
 
 <p align="center"><em>Fig. Team Eta at Kineco Kaman Composites, Goa (India)</em></p>
 

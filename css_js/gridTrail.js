@@ -4,6 +4,8 @@
  */
 (function() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(max-width: 768px)').matches) return;
+  if (window.matchMedia('(pointer: coarse)').matches) return;
 
   var cell = 22;
   var radius = 400;
