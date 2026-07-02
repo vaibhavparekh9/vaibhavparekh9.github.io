@@ -110,6 +110,46 @@ a {
   flex-shrink: 0;
 }
 
+/* ---------- Profile picture slider ---------- */
+.photo-slider {
+  position: relative;
+  width: clamp(160px, 16vw, 240px);
+  height: clamp(160px, 16vw, 240px);
+  border-radius: 15px;
+  overflow: hidden;
+  flex-shrink: 0;
+  cursor: col-resize;
+  touch-action: none;
+  border: 0.05px solid #2b2b2b;
+}
+
+.photo-slider__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.photo-slider__top {
+  clip-path: inset(0 30% 0 0);
+}
+
+.photo-slider__handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 70%;
+  width: 2px;
+  background: #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  z-index: 2;
+}
+
 .intro__text {
   font-size: 1.1rem;
   line-height: 1.6;
@@ -449,6 +489,11 @@ a {
   }
 
   .intro__photo {
+    width: 120px;
+    height: 120px;
+  }
+
+  .photo-slider {
     width: 120px;
     height: 120px;
   }

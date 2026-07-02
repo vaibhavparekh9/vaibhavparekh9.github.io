@@ -1,3 +1,101 @@
+/* ---------- Profile picture slider (with animation) ---------- */
+(function() {
+  var slider = document.querySelector('.photo-slider');
+  if (!slider) return;
+
+  var topImg = slider.querySelector('.photo-slider__top');
+  var handle = slider.querySelector('.photo-slider__handle');
+  var animFrame = null;
+
+  function setPositionPct(pct) {
+    pct = Math.max(0, Math.min(100, pct));
+    topImg.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+    handle.style.left = pct + '%';
+  }
+
+  function setPosition(x) {
+    var rect = slider.getBoundingClientRect();
+    setPositionPct((x - rect.left) / rect.width * 100);
+  }
+
+  function stopAnimation() {
+    if (animFrame !== null) {
+      cancelAnimationFrame(animFrame);
+      animFrame = null;
+    }
+  }
+
+  function easeIn(t) {
+    return t * t;
+  }
+
+  function easeOut(t) {
+    return 1 - (1 - t) * (1 - t);
+  }
+
+  function playIntroAnimation() {
+    var leg1Duration = 1400;
+    var leg2Duration = 1000;
+    var totalDuration = leg1Duration + leg2Duration;
+    var start = performance.now();
+
+    function frame(now) {
+      var elapsed = now - start;
+      var pct;
+
+      if (elapsed >= totalDuration) {
+        setPositionPct(70);
+        animFrame = null;
+        return;
+      }
+
+      if (elapsed <= leg1Duration) {
+        pct = 70 + (10 - 70) * easeIn(elapsed / leg1Duration);
+      } else {
+        pct = 10 + (70 - 10) * easeOut((elapsed - leg1Duration) / leg2Duration);
+      }
+
+      setPositionPct(pct);
+      animFrame = requestAnimationFrame(frame);
+    }
+
+    animFrame = requestAnimationFrame(frame);
+  }
+
+  function onMove(e) {
+    var x = e.touches ? e.touches[0].clientX : e.clientX;
+    setPosition(x);
+  }
+
+  function onUp() {
+    window.removeEventListener('mousemove', onMove);
+    window.removeEventListener('mouseup', onUp);
+    window.removeEventListener('touchmove', onMove);
+    window.removeEventListener('touchend', onUp);
+  }
+
+  slider.addEventListener('mousedown', function(e) {
+    stopAnimation();
+    e.preventDefault();
+    onMove(e);
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+  });
+
+  slider.addEventListener('touchstart', function(e) {
+    stopAnimation();
+    onMove(e);
+    window.addEventListener('touchmove', onMove);
+    window.addEventListener('touchend', onUp);
+  });
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    window.addEventListener('load', function() {
+      setTimeout(playIntroAnimation, 400);
+    });
+  }
+})();
+
 /* ---------- Project tag colors ---------- */
 var TAG_COLORS = {
   'Computer Vision':  '#a8d8ea',
