@@ -12,11 +12,11 @@
       var el = document.getElementById('md-content');
       el.innerHTML = parseMd(md);
 
-      // Rewrite relative src attributes (images, iframes) to resolve from the project subfolder
-      el.querySelectorAll('img[src]').forEach(function(img) {
-        var s = img.getAttribute('src');
+      // Rewrite relative src attributes (images, videos, iframes) to resolve from the project subfolder
+      el.querySelectorAll('img[src], video[src]').forEach(function(el) {
+        var s = el.getAttribute('src');
         if (s && !s.startsWith('http') && !s.startsWith('/') && !s.startsWith(project + '/')) {
-          img.setAttribute('src', project + '/' + s);
+          el.setAttribute('src', project + '/' + s);
         }
       });
 
@@ -110,7 +110,7 @@ function parseContent(src) {
     .replace(/^<!-- YOUTUBE: (.+?) -->$/gm, '<div class="md-video"><iframe src="https://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe></div>')
     .replace(/^<!--.*?-->$/gm, '')
     .replace(/<\/blockquote>\n<blockquote>/g, '<br>')
-    .replace(/^(?!<[hHudoltrbu]|<\/?div|<\/?table|<!--|\s*$|%%BESIDE)(.+)$/gm, '<p>$1</p>')
+    .replace(/^(?!<[hHudoltrbuvp]|<\/?div|<\/?table|<!--|\s*$|%%BESIDE)(.+)$/gm, '<p>$1</p>')
     .replace(/<p>\s*<\/p>/g, '')
     .replace(/((<tr>.*<\/tr>\s*)+)/g, '<table>$1</table>')
     .replace(/<!--sep-->/g, '')
