@@ -13,6 +13,14 @@ F1-Tenth is a 1/10th scale autonomous racing platform. Map-based methods leverag
 
 ---
 
+## Spotlight: Our 3 Winning Races
+
+<video src="../f1tenth_reactive/images/race-1.mp4" autoplay loop muted playsinline></video>
+<video src="../f1tenth_reactive/images/race-2.mp4" autoplay loop muted playsinline></video>
+<video src="images/race-3.mp4" autoplay loop muted playsinline></video>
+
+---
+
 ## Mapping and Localization
 
 Used SLAM Toolbox for mapping the environment, and Particle Filter for localization.
@@ -31,7 +39,7 @@ A waypoint logger records (x, y, θ) from odometry during a manual lap. At runti
 
 where *y* is the lateral offset of the goal in the vehicle frame and *Ld* is the Euclidean distance to it. Speed scales down with steering magnitude using an exponential decay.
 
-<!-- YOUTUBE_ROW: MTXsTfBFmUI | q9l0kdFcyaw -->
+<!-- YOUTUBE_ROW: MTXsTfBFmUI | ir02Xajkpvw -->
 
 ---
 
@@ -43,4 +51,4 @@ Implemented Rapidly-exploring Random Trees (RRT) as a local planner for real-tim
 
 At each LIDAR scan, a local occupancy grid is constructed in the vehicle frame. Each valid range measurement is projected to a cell, and an inflation radius is applied around occupied cells for collision safety. 
 
-<!-- YOUTUBE_ROW: l26VC70QJqI | ir02Xajkpvw -->
+<!-- YOUTUBE: l26VC70QJqI -->
