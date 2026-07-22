@@ -1,3 +1,119 @@
+/* ---------- Laser trail pointer ---------- */
+(function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
+  var color = '#c41230';
+  var maxAge = 250;       // trail lifetime in ms (lower = shorter trail)
+  var maxPoints = 40;     // max trail dots kept (lower = shorter trail)
+  var headRadius = 4;
+  var tailRadius = 1.1;
+  var glowSize = 12;
+  var maxGap = 4;         // max px between trail dots (lower = denser)
+  var trail = [];
+  var headPos = null;     // always remembers last cursor position
+
+  var canvas = document.createElement('canvas');
+  canvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9999';
+  canvas.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(canvas);
+  document.body.style.cursor = 'none';
+
+  var ctx = canvas.getContext('2d');
+  var dpr = 1;
+  var pending = false;
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.floor(window.innerWidth * dpr);
+    canvas.height = Math.floor(window.innerHeight * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function draw() {
+    pending = false;
+    var now = performance.now();
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    ctx.clearRect(0, 0, w, h);
+
+    // prune old points
+    while (trail.length && now - trail[0].t > maxAge) trail.shift();
+
+    // draw trail dots
+    for (var i = 0; i < trail.length; i++) {
+      var p = trail[i];
+      var age = (now - p.t) / maxAge;
+      var alpha = 1 - age;
+      var r = tailRadius + (headRadius - tailRadius) * (1 - age);
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.globalAlpha = alpha * 0.7;
+      ctx.fill();
+    }
+
+    // always draw head dot with glow at last known position
+    if (headPos) {
+      ctx.globalAlpha = 1;
+      ctx.shadowColor = color;
+      ctx.shadowBlur = glowSize;
+      ctx.beginPath();
+      ctx.arc(headPos.x, headPos.y, headRadius, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+
+    // keep animating while trail has points to fade
+    if (trail.length) scheduleDraw();
+  }
+
+  function scheduleDraw() {
+    if (!pending) {
+      pending = true;
+      requestAnimationFrame(draw);
+    }
+  }
+
+  window.addEventListener('resize', resize);
+
+  window.addEventListener('mousemove', function(e) {
+    var now = performance.now();
+    var nx = e.clientX;
+    var ny = e.clientY;
+
+    // interpolate to fill gaps for dense trail
+    if (trail.length) {
+      var last = trail[trail.length - 1];
+      var dx = nx - last.x;
+      var dy = ny - last.y;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist > maxGap) {
+        var steps = Math.ceil(dist / maxGap);
+        for (var s = 1; s < steps; s++) {
+          var frac = s / steps;
+          trail.push({ x: last.x + dx * frac, y: last.y + dy * frac, t: now });
+        }
+      }
+    }
+
+    trail.push({ x: nx, y: ny, t: now });
+    if (trail.length > maxPoints) trail.splice(0, trail.length - maxPoints);
+    headPos = { x: nx, y: ny };
+    scheduleDraw();
+  });
+
+  window.addEventListener('mouseleave', function() {
+    trail.length = 0;
+    headPos = null;
+    scheduleDraw();
+  });
+
+  resize();
+})();
+
 /* ---------- Routing ---------- */
 (function() {
   var params = new URLSearchParams(window.location.search);
