@@ -96,6 +96,47 @@
   }
 })();
 
+/* ---------- Decode-text animation ---------- */
+(function() {
+  var el = document.querySelector('[data-decode]');
+  if (!el) return;
+
+  var finalText = el.textContent;
+  var chars = '!@#$%&?/0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  var len = finalText.length;
+  var totalFrames = 40;
+  var frame = 0;
+
+  function randomChar() {
+    return chars[Math.floor(Math.random() * chars.length)];
+  }
+
+  function scramble() {
+    var out = '';
+    for (var i = 0; i < len; i++) {
+      out += finalText[i] === ' ' ? ' ' : randomChar();
+    }
+    return out;
+  }
+
+  function run() {
+    frame++;
+    if (frame >= totalFrames) {
+      el.textContent = finalText;
+      return;
+    }
+    el.textContent = scramble();
+    requestAnimationFrame(run);
+  }
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  el.textContent = scramble();
+  window.addEventListener('load', function() {
+    setTimeout(run, 500);
+  });
+})();
+
 /* ---------- Project tag colors ---------- */
 var TAG_COLORS = {
   'Computer Vision':  '#4a9cb8',
