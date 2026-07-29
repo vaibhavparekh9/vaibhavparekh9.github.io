@@ -1,4 +1,3 @@
-/* Full-page overlay: above content, below nav (z-index 100 in style.css) */
 #grid-trail {
   position: fixed;
   inset: 0;
