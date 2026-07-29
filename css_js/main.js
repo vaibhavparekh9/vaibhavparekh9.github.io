@@ -98,21 +98,22 @@
 
 /* ---------- Project tag colors ---------- */
 var TAG_COLORS = {
-  'Computer Vision':  '#a8d8ea',
-  Learning:           '#d5a6e6',
-  Navigation:         '#a8e6cf',
-  SLAM:               '#f9d89c',
-  Controls:           '#f4a7a3',
-  CAD:                '#c8c8c8',
-  'Mechanical Design':'#b8c9e8',
-  Manufacturing:      '#e8c4a0'
+  'Computer Vision':  '#4a9cb8',
+  Learning:           '#9b5eb8',
+  Navigation:         '#4aab7a',
+  SLAM:               '#c9a035',
+  Controls:           '#c95a55',
+  CAD:                '#888888',
+  'Mechanical Design':'#6a8ab8',
+  Manufacturing:      '#b88a50'
 };
 
 function initTags() {
   document.querySelectorAll('.proj-tag').forEach(function(el) {
     var key = el.getAttribute('data-tag');
     if (key && TAG_COLORS[key]) {
-      el.style.backgroundColor = TAG_COLORS[key];
+      el.style.color = TAG_COLORS[key];
+      el.style.borderColor = TAG_COLORS[key];
     }
   });
 }
@@ -150,38 +151,6 @@ window.addEventListener('load', initTags);
   });
 })();
 
-/* ---------- Animated project card borders ---------- */
-function initBorders() {
-  var r = 15;
-  document.querySelectorAll('.proj-card').forEach(function(card) {
-    var w = card.offsetWidth;
-    var h = card.offsetHeight;
-    var svg = card.querySelector('.proj-card__border');
-    var p   = svg.querySelector('path');
-
-    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
-
-    p.setAttribute('d',
-      'M 0 ' + h/2 +
-      ' L 0 ' + (h - r) +
-      ' Q 0 ' + h + ' ' + r + ' ' + h +
-      ' L ' + (w - r) + ' ' + h +
-      ' Q ' + w + ' ' + h + ' ' + w + ' ' + (h - r) +
-      ' L ' + w + ' ' + r +
-      ' Q ' + w + ' 0 ' + (w - r) + ' 0' +
-      ' L ' + r + ' 0' +
-      ' Q 0 0 0 ' + r +
-      ' L 0 ' + h/2
-    );
-  });
-}
-
-window.addEventListener('load', function() {
-  if (document.querySelector('.proj-card')) initBorders();
-});
-window.addEventListener('resize', function() {
-  if (document.querySelector('.proj-card')) initBorders();
-});
 
 /* ---------- Scroll progress bar ---------- */
 (function() {
