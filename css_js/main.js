@@ -183,6 +183,21 @@ window.addEventListener('resize', function() {
   if (document.querySelector('.proj-card')) initBorders();
 });
 
+/* ---------- Scroll progress bar ---------- */
+(function() {
+  var bar = document.querySelector('.scroll-progress');
+  if (!bar) return;
+
+  function update() {
+    var st = window.scrollY;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? st / h * 100 : 0) + '%';
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('load', update);
+})();
+
 /* ---------- Active nav link on scroll ---------- */
 (function() {
   var navLinks = document.querySelectorAll('.nav-bar__right > a.nav-bar__text-link');
