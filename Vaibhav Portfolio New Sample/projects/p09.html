@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Team Eta: Yugant Supermileage Vehicle — Vaibhav Parekh</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23171A21'/%3E%3Cpath d='M6 22 L16 8 L26 22' stroke='%23E8324F' stroke-width='2.5' fill='none'/%3E%3C/svg%3E" />
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================================
+   Vaibhav Parekh — shared design system (Spline Sans Mono + Satoshi)
+   ========================================================================== */
+:root{
+  --font-body:"Satoshi",ui-sans-serif,system-ui,sans-serif;
+  --font-mono:"Spline Sans Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --text-xs:.75rem;--text-sm:.875rem;--text-base:1rem;--text-md:1.125rem;--text-lg:1.25rem;--text-xl:1.5rem;--text-2xl:1.75rem;--text-3xl:2.125rem;
+  --lead-tight:1.16;--lead-snug:1.35;--lead-normal:1.6;--track-tight:-0.015em;--track-eyebrow:.16em;
+  --w-med:500;--w-semi:600;--w-bold:700;
+  --s1:.25rem;--s2:.5rem;--s3:.75rem;--s4:1rem;--s5:1.25rem;--s6:1.5rem;--s8:2rem;--s10:2.5rem;--s12:3rem;--s16:4rem;--s20:5rem;--s24:6rem;
+  --r-sm:6px;--r-md:10px;--r-lg:14px;--r-xl:20px;--r-full:9999px;
+  --container:1160px;--measure:68ch;
+  --dur-fast:120ms;--dur-base:200ms;--dur-slow:360ms;--ease:cubic-bezier(.4,0,.2,1);--ease-out:cubic-bezier(.16,1,.3,1);
+  --grid:26px;
+}
+[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#171A21;--bg-raised:#1F232D;--bg-sunken:#12151B;--bg-overlay:#1C2029;
+  --ink:#F3F3E9;--ink-2:#B4B7BF;--ink-3:#808591;
+  --line:rgba(243,243,233,.10);--line-2:rgba(243,243,233,.16);--line-strong:rgba(243,243,233,.28);
+  --brand:#C41230;--brand-hi:#E8324F;--accent:#F0576E;--brand-soft:#241519;--focus:#F0576E;
+  --dot:rgba(243,243,233,.85);--dot-base:.05;--dot-glow:.20;--cross:243,243,233;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.45);--shadow-lg:0 24px 60px rgba(0,0,0,.6);
+}
+[data-theme="light"]{
+  color-scheme:light;
+  --bg:#F3F3E9;--bg-raised:#FBFBF5;--bg-sunken:#ECECDF;--bg-overlay:#FBFBF5;
+  --ink:#1C1F26;--ink-2:#565A63;--ink-3:#7C808A;
+  --line:rgba(23,26,33,.10);--line-2:rgba(23,26,33,.16);--line-strong:rgba(23,26,33,.28);
+  --brand:#C41230;--brand-hi:#A50F28;--accent:#C41230;--brand-soft:#F6DFE2;--focus:rgba(196,18,48,.6);
+  --dot:rgba(23,26,33,.85);--dot-base:.06;--dot-glow:.22;--cross:23,26,33;
+  --shadow-sm:0 1px 3px rgba(23,26,33,.08);--shadow-lg:0 24px 60px rgba(23,26,33,.18);
+}
+/* base */
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:var(--text-base);line-height:var(--lead-normal);-webkit-font-smoothing:antialiased;opacity:0;transition:background var(--dur-slow) var(--ease),color var(--dur-slow) var(--ease);}
+body.ready{opacity:1;transition:opacity .5s var(--ease),background var(--dur-slow) var(--ease),color var(--dur-slow) var(--ease);}
+h1,h2,h3,h4{font-family:var(--font-mono);font-weight:var(--w-semi);margin:0;letter-spacing:var(--track-tight);}
+p{margin:0;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;text-underline-offset:3px;}
+img,svg,canvas,video{display:block;max-width:100%;}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:var(--r-sm);}
+:target{scroll-margin-top:88px;}
+.skip{position:absolute;left:var(--s4);top:-100px;z-index:3000;background:var(--brand);color:#fff;padding:var(--s3) var(--s5);border-radius:var(--r-md);font-family:var(--font-mono);font-size:var(--text-sm);transition:top var(--dur-base) var(--ease);}
+.skip:focus{top:var(--s4);text-decoration:none;}
+.wrap{max-width:var(--container);margin:0 auto;padding-inline:var(--s6);}
+.eyebrow{font-family:var(--font-mono);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:var(--track-eyebrow);color:var(--ink-3);display:inline-flex;align-items:center;gap:var(--s2);}
+.eyebrow::before{content:"";width:20px;height:1px;background:var(--brand-hi);}
+#grid{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease-out),transform .55s var(--ease-out);}
+.reveal.in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.reveal{opacity:1;transform:none;transition:none;}body,body.ready{opacity:1;transition:none;}}
+/* nav */
+.nav{position:sticky;top:0;z-index:200;background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+.nav__in{display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav__brand{font-family:var(--font-mono);font-weight:var(--w-semi);letter-spacing:var(--track-tight);display:inline-flex;align-items:center;gap:10px;color:var(--ink);}
+.nav__brand:hover{text-decoration:none;}
+.nav__brand .mark{width:26px;height:26px;}
+.nav__links{display:flex;align-items:center;gap:2px;}
+.nav__links a{position:relative;font-family:var(--font-mono);font-size:var(--text-sm);color:var(--ink-2);padding:9px 14px;border-radius:var(--r-sm);min-height:24px;display:inline-flex;align-items:center;overflow:hidden;z-index:0;text-decoration:none;transition:color var(--dur-base) var(--ease);}
+.nav__links a::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--bg-sunken);transform:translateY(101%);transition:transform var(--dur-base) var(--ease-out);}
+.nav__links a:hover{color:var(--ink);text-decoration:none;}
+.nav__links a:hover::before{transform:translateY(0);}
+.nav__links a::after{content:"";position:absolute;left:50%;right:50%;bottom:5px;height:1.5px;background:var(--brand-hi);transition:left var(--dur-base) var(--ease),right var(--dur-base) var(--ease);}
+.nav__links a[aria-current="true"]{color:var(--ink);}
+.nav__links a[aria-current="true"]::after{left:14px;right:14px;}
+.icnbtn{width:38px;height:38px;display:inline-grid;place-items:center;color:var(--ink-2);background:transparent;border:1px solid var(--line);border-radius:var(--r-sm);cursor:pointer;transition:border-color var(--dur-base) var(--ease),color var(--dur-base) var(--ease),background var(--dur-base) var(--ease);}
+.icnbtn:hover{color:var(--ink);border-color:var(--line-strong);background:var(--bg-sunken);}
+.nav__ext{display:flex;gap:6px;margin-left:8px;}
+.hamburger{display:none;}
+#progress{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--brand-hi);transition:width .1s linear;}
+/* layout */
+section{position:relative;z-index:1;}
+.sec{padding-block:var(--s20);}
+.sec__head{display:flex;align-items:baseline;gap:var(--s4);margin-bottom:var(--s10);flex-wrap:wrap;}
+.sec__num{font-family:var(--font-mono);color:var(--brand-hi);font-size:var(--text-sm);}
+.sec__title{font-size:var(--text-2xl);line-height:var(--lead-tight);}
+.sec__link{margin-left:auto;font-family:var(--font-mono);font-size:var(--text-sm);}
+/* HERO — compact so the projects section peeks above the fold */
+.hero{padding-block:var(--s12) var(--s10);}
+.hero__grid{display:grid;grid-template-columns:1.45fr .55fr;gap:var(--s12);align-items:center;}
+.hero__title{font-family:var(--font-mono);font-size:clamp(1.45rem,2.5vw,1.95rem);line-height:1.22;letter-spacing:var(--track-tight);font-weight:var(--w-semi);max-width:22ch;}
+.hero__title .red{color:var(--brand-hi);}
+.hero__sub{margin-top:var(--s4);font-size:var(--text-base);color:var(--ink-2);max-width:48ch;}
+.hero__cta{margin-top:var(--s6);display:flex;gap:var(--s3);flex-wrap:wrap;}
+.hero__media{justify-self:end;width:100%;max-width:240px;}
+.btn{position:relative;font-family:var(--font-mono);font-size:var(--text-sm);font-weight:var(--w-med);display:inline-flex;align-items:center;gap:8px;padding:12px 20px;min-height:44px;border-radius:var(--r-md);border:1px solid transparent;cursor:pointer;text-decoration:none;overflow:hidden;z-index:0;transition:color var(--dur-base) var(--ease),border-color var(--dur-base) var(--ease),transform var(--dur-base) var(--ease);}
+.btn:hover{text-decoration:none;transform:translateY(-1px);}.btn:active{transform:translateY(0);}
+.btn--primary{background:var(--brand);color:#fff;}
+.btn--primary::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--brand-hi);transform:translateY(101%);transition:transform var(--dur-base) var(--ease-out);}
+.btn--primary:hover::before{transform:translateY(0);}
+.btn--ghost{background:transparent;color:var(--ink);border-color:var(--line-2);}
+.btn--ghost:hover{border-color:var(--line-strong);background:var(--bg-sunken);}
+/* portrait */
+.portrait{position:relative;aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);background:var(--bg-raised);box-shadow:var(--shadow-sm);}
+.portrait canvas,.portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.portrait__hint{position:absolute;left:10px;bottom:10px;z-index:3;font-family:var(--font-mono);font-size:10px;letter-spacing:.05em;color:var(--ink-2);background:color-mix(in srgb,var(--bg) 70%,transparent);border:1px solid var(--line);border-radius:var(--r-full);padding:4px 9px;pointer-events:none;opacity:.9;transition:opacity var(--dur-base) var(--ease);}
+.portrait:hover .portrait__hint{opacity:0;}
+/* project grid */
+.grid-proj{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:var(--s5);}
+.pcard{display:flex;flex-direction:column;text-align:left;background:var(--bg-raised);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;color:inherit;text-decoration:none;transition:transform var(--dur-base) var(--ease),border-color var(--dur-base) var(--ease),box-shadow var(--dur-base) var(--ease);}
+.pcard:hover,.pcard:focus-visible{transform:translateY(-2px);border-color:var(--line-2);box-shadow:var(--shadow-sm);text-decoration:none;}
+.pcard__media{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--bg-sunken);}
+.pcard__media img{width:100%;height:100%;object-fit:cover;transition:transform var(--dur-slow) var(--ease-out);}
+.pcard:hover .pcard__media img{transform:scale(1.04);}
+.pcard__body{padding:var(--s5);display:flex;flex-direction:column;gap:var(--s3);flex:1;}
+.pcard__idx{font-family:var(--font-mono);font-size:var(--text-xs);color:var(--ink-3);letter-spacing:.04em;}
+.pcard__title{font-family:var(--font-mono);font-size:var(--text-md);line-height:var(--lead-snug);color:var(--ink);}
+.pcard__excerpt{font-size:var(--text-sm);color:var(--ink-2);line-height:var(--lead-snug);}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;}
+.tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.03em;color:var(--ink-2);border:1px solid var(--line-2);border-radius:var(--r-full);padding:3px 9px;}
+.pcard__more{font-family:var(--font-mono);font-size:var(--text-xs);color:var(--accent);display:inline-flex;gap:6px;align-items:center;}
+/* trajectory accordion — red year */
+.acc{display:flex;flex-direction:column;gap:var(--s3);}
+.acc__item{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--bg-raised);overflow:hidden;}
+.acc__btn{width:100%;text-align:left;background:transparent;border:0;cursor:pointer;color:inherit;font:inherit;display:flex;align-items:center;gap:var(--s4);padding:var(--s5) var(--s6);min-height:56px;transition:background var(--dur-base) var(--ease);}
+.acc__btn:hover{background:var(--bg-sunken);}
+.acc__date{font-family:var(--font-mono);font-size:var(--text-xs);color:var(--ink);flex:none;width:140px;letter-spacing:.03em;font-weight:var(--w-med);}
+.acc__yr{color:var(--brand-hi);}
+.acc__role{font-family:var(--font-mono);font-size:var(--text-md);color:var(--ink);}
+.acc__role .org{color:var(--accent);}
+.acc__chev{margin-left:auto;flex:none;color:var(--ink-3);transition:transform var(--dur-base) var(--ease);}
+.acc__btn[aria-expanded="true"] .acc__chev{transform:rotate(180deg);}
+.acc__panel{max-height:0;overflow:hidden;transition:max-height var(--dur-slow) var(--ease);}
+.acc__panel>div{padding:0 var(--s6) var(--s6) calc(var(--s6) + 140px + var(--s4));color:var(--ink-2);font-size:var(--text-sm);max-width:var(--measure);}
+@media (max-width:640px){.acc__date{width:auto;}.acc__panel>div{padding-left:var(--s6);}}
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:var(--s6);}
+.skillcol h3{font-family:var(--font-mono);font-size:var(--text-sm);color:var(--brand-hi);text-transform:uppercase;letter-spacing:.1em;margin-bottom:var(--s3);}
+.skillcol ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px;}
+.skillcol li{font-family:var(--font-mono);font-size:var(--text-xs);color:var(--ink-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:5px 9px;background:var(--bg-raised);}
+/* footer */
+.footer{border-top:1px solid var(--line);padding-block:var(--s16);}
+.footer__grid{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--s8);flex-wrap:wrap;}
+.footer__big{font-family:var(--font-mono);font-size:clamp(1.4rem,3vw,var(--text-2xl));color:var(--ink);letter-spacing:var(--track-tight);}
+.footer__links{display:flex;flex-direction:column;gap:var(--s2);font-family:var(--font-mono);font-size:var(--text-sm);}
+.footer__meta{margin-top:var(--s10);font-family:var(--font-mono);font-size:11px;color:var(--ink-3);}
+/* responsive */
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation:none!important;}.btn:hover,.pcard:hover{transform:none;}}
+@media (max-width:860px){.hero__grid{grid-template-columns:1fr;gap:var(--s8);}.hero__media{justify-self:start;max-width:200px;}}
+@media (max-width:640px){
+  .hamburger{display:inline-grid;}
+  .nav__panel{position:absolute;top:60px;left:0;right:0;background:var(--bg-overlay);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;padding:var(--s3) var(--s6) var(--s6);display:none;}
+  .nav.open .nav__panel{display:flex;}
+  .nav__panel a{padding:12px 4px;}.nav__panel a::after{display:none;}.nav__ext{margin-top:var(--s2);}
+}
+
+/* ============================================================================
+   CASE-STUDY PAGE
+   ========================================================================== */
+.cs-cover{position:relative;height:min(46vh,420px);overflow:hidden;border-bottom:1px solid var(--line);background:var(--bg-sunken);}
+.cs-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.cs-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,color-mix(in srgb,var(--bg) 20%,transparent),var(--bg));}
+.cs-cover__in{position:absolute;left:0;right:0;bottom:0;z-index:2;}
+.cs-back{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:var(--text-sm);color:var(--ink-2);margin-bottom:var(--s5);}
+.cs-back:hover{color:var(--ink);text-decoration:none;}
+.cs-domain{font-family:var(--font-mono);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.12em;color:var(--brand-hi);}
+.cs-title{font-family:var(--font-mono);font-size:clamp(1.6rem,3.4vw,2.4rem);line-height:1.14;letter-spacing:var(--track-tight);margin:var(--s3) 0 var(--s5);max-width:20ch;}
+.cs-meta{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s5);font-family:var(--font-mono);font-size:var(--text-xs);color:var(--ink-3);padding-bottom:var(--s8);}
+.cs-meta b{color:var(--ink-2);font-weight:var(--w-med);}
+.cs-body{max-width:760px;margin:0 auto;padding:var(--s16) var(--s6) var(--s24);}
+.cs-lede{font-size:var(--text-lg);color:var(--ink);line-height:var(--lead-normal);margin-bottom:var(--s10);}
+.cs-body h2{font-family:var(--font-mono);font-size:var(--text-xl);color:var(--ink);margin:var(--s12) 0 var(--s4);}
+.cs-body h3{font-family:var(--font-mono);font-size:var(--text-md);color:var(--ink);margin:var(--s8) 0 var(--s2);}
+.cs-body p{color:var(--ink-2);margin-bottom:var(--s4);line-height:var(--lead-normal);}
+.cs-body ul{color:var(--ink-2);margin:0 0 var(--s4);padding-left:var(--s5);}
+.cs-body li{margin-bottom:var(--s2);}
+.cs-body strong{color:var(--ink);font-weight:var(--w-semi);}
+.cs-body a{color:var(--accent);}
+.cs-body code,.cs-eq{font-family:var(--font-mono);background:var(--bg-sunken);border:1px solid var(--line);border-radius:var(--r-sm);padding:1px 6px;font-size:.92em;color:var(--ink);}
+.cs-eq{display:block;padding:12px 14px;border-left:2px solid var(--brand-hi);margin:var(--s4) 0;white-space:nowrap;overflow-x:auto;}
+.cs-fig{margin:var(--s8) 0;}
+.cs-fig__ph{aspect-ratio:16/9;border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;background:var(--bg-sunken);position:relative;display:grid;place-items:center;}
+.cs-fig__ph img{width:100%;height:100%;object-fit:cover;}
+.cs-fig__tag{position:absolute;top:10px;left:10px;font-family:var(--font-mono);font-size:10px;letter-spacing:.05em;color:var(--ink-3);border:1px solid var(--line-2);border-radius:var(--r-full);padding:3px 9px;background:color-mix(in srgb,var(--bg) 60%,transparent);}
+.cs-fig figcaption{font-family:var(--font-mono);font-size:var(--text-xs);color:var(--ink-3);margin-top:var(--s2);text-align:center;}
+.cs-fig--row{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3);}
+.cs-fig--row .cs-fig__ph{aspect-ratio:4/3;}
+.cs-tags{display:flex;flex-wrap:wrap;gap:6px;margin:var(--s8) 0;}
+.cs-foot{display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:wrap;align-items:center;margin-top:var(--s12);padding-top:var(--s8);border-top:1px solid var(--line);}
+.cs-nav{display:flex;gap:var(--s3);font-family:var(--font-mono);font-size:var(--text-sm);}
+@media (max-width:600px){.cs-fig--row{grid-template-columns:1fr;}}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#cs">Skip to content</a>
+<canvas id="grid" aria-hidden="true"></canvas>
+<header class="nav" id="nav">
+  <div class="wrap nav__in">
+    <a class="nav__brand" href="../index.html" aria-label="Vaibhav Parekh — home">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="none" stroke="currentColor" stroke-opacity=".25"/><path d="M6 23 L16 8 L26 23" style="stroke:var(--brand-hi)" stroke-width="2.5" fill="none"/><circle cx="16" cy="8" r="2" style="fill:var(--brand-hi)"/></svg>
+      <span>Vaibhav Parekh</span>
+    </a>
+    <button class="icnbtn hamburger" id="ham" aria-label="Open menu" aria-expanded="false" aria-controls="navpanel">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav class="nav__links nav__panel" id="navpanel" aria-label="Primary">
+      <a href="../index.html#work">work/</a>
+      <a href="../index.html#experience">experience/</a>
+      <a href="../index.html#skills">skills/</a>
+      <a href="../index.html#contact">contact/</a>
+      <a href="../Vaibhav Parekh_Resume.pdf" target="_blank" rel="noopener">resume ↗</a>
+      <div class="nav__ext">
+        <button class="icnbtn" id="theme" aria-label="Switch to light theme" title="Toggle theme (T)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M5 19l1.4-1.4M17.6 6.4L19 5"/></svg></button>
+        <a class="icnbtn" href="https://github.com/vaibhavparekh9" target="_blank" rel="noopener" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58 0-.28-.01-1.04-.02-2.04-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 016 0c2.3-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22 0 1.61-.02 2.9-.02 3.29 0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12 24 5.37 18.63 0 12 0z"/></svg></a>
+        <a class="icnbtn" href="https://www.linkedin.com/in/vaibhavparekh9/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      </div>
+    </nav>
+  </div>
+  <div id="progress"></div>
+</header>
+<main id="cs">
+  <div class="cs-cover">
+    <img src="covers/p09.png" alt="Team Eta: Yugant Supermileage Vehicle — cover" />
+    <div class="cs-cover__in wrap">
+      <a class="cs-back" href="../index.html#work">← Things I've worked on</a>
+      <div class="cs-domain">Mechanical · Manufacturing</div>
+      <h1 class="cs-title">Team Eta: Yugant Supermileage Vehicle</h1>
+      <div class="cs-meta"><span><b>Association:</b> Team Eta, K. J. Somaiya College of Engineering, Mumbai</span> <span><b>Role:</b> Drivetrain Head</span></div>
+    </div>
+  </div>
+  <article class="cs-body">
+    <h2>Background</h2>
+<p class="cs-lede">Team Eta is a student-led SAE Supermileage/Shell Eco-marathon team. These competitions are among the world's leading energy-efficiency programs, where students design, build, and test fuel-efficient cars, pushing the boundaries of what is technically possible.</p>
+<figure class="cs-fig"><div class="cs-fig__ph"><span class="cs-fig__tag">Figure</span><img src="media/placeholder.png" alt="Fig. CAD render of Yugant prototype — placeholder"></div><figcaption>Fig. CAD render of Yugant prototype · placeholder for AI-generated / project media</figcaption></figure>
+<figure class="cs-fig"><div class="cs-fig__ph"><span class="cs-fig__tag">Figure</span><img src="media/placeholder.png" alt="Fig. Engine-side assembly (left); Lightweight aluminum rear-sprocket design (right) — placeholder"></div><figcaption>Fig. Engine-side assembly (left); Lightweight aluminum rear-sprocket design (right) · placeholder for AI-generated / project media</figcaption></figure>
+<h2>Experience</h2>
+<p>As Drivetrain Head, my work on Yugant spanned two major areas: the <strong>drivetrain (transmission)</strong> and <strong>vehicle bodyworks</strong>.</p>
+<h3>I. The Drivetrain</h3>
+<p>I led a team of four on the design, analysis, and manufacturing of the drivetrain (transmission) system. The transmission was a single-sprocket chain drive with a dog clutch for engagement and disengagement from the engine. We designed custom metal–plastic hybrid components that <strong>reduced transmission weight by 30%</strong>, helping the vehicle achieve a fuel efficiency of <strong>270 km/L (635 mpg)</strong>.</p>
+<h3>II. The Bodyworks</h3>
+<p>Manufacturing the vehicle body of Yugant was a full-team effort. The process can be broadly divided into three phases:</p>
+<ul><li><strong>Manufacturing the pattern:</strong> CNC routing of pattern templates on MDF boards; accurately joining the templates to form the pattern; applying putty over the pattern surface; sanding for smoothness.</li><li><strong>Manufacturing the mold:</strong> Chopped strand mat glass fiber was cured to form the mold, then sanded and polished for smoothness.</li><li><strong>Manufacturing the body:</strong> A Lantor Soric core sandwiched between carbon fiber formed the final vehicle body, built using vacuum infusion at an industrial aerospace composites facility.</li></ul>
+<figure class="cs-fig"><div class="cs-fig__ph"><span class="cs-fig__tag">Figure</span><img src="media/placeholder.png" alt="Fig. Engine-side assembly (left); Lightweight aluminum rear-sprocket design (right) — placeholder"></div><figcaption>Fig. Engine-side assembly (left); Lightweight aluminum rear-sprocket design (right) · placeholder for AI-generated / project media</figcaption></figure>
+<figure class="cs-fig"><div class="cs-fig__ph"><span class="cs-fig__tag">Figure</span><img src="media/placeholder.png" alt="Project media — placeholder"></div><figcaption>Project media · placeholder for AI-generated / project media</figcaption></figure>
+<h2>Highlights</h2>
+<ul><li>Led drivetrain design and manufacturing for a competitive supermileage vehicle.</li><li><strong>30%</strong> reduction in transmission weight through custom hybrid components.</li><li><strong>270 km/L (635 mpg)</strong> fuel efficiency on Yugant.</li><li>Contributed to end-to-end carbon-fiber body manufacturing via pattern, mold, and vacuum-infusion processes.</li></ul>
+    <div class="cs-tags"><span class="tag">SolidWorks</span><span class="tag">Carbon Fiber</span><span class="tag">Drivetrain</span></div>
+    <div class="cs-foot"><div class="cs-links"></div><div class="cs-nav"><a href="p08.html">← AutoTip — Pen Tracking &amp; Writing System</a><span></span></div></div>
+  </article>
+</main>
+<footer class="footer"><div class="wrap footer__meta">© <span id="yr"></span> Vaibhav Parekh · <a href="../index.html">Home</a> · <a href="../index.html#work">All projects</a></div></footer>
+<script>
+/* ============================================================================
+   Shared behaviors — safe to load on every page (all element lookups guarded)
+   theme · mobile menu · scroll progress/active · reveal · accordion · dot-grid
+   ========================================================================== */
+(function(){ /* THEME */
+  var root=document.documentElement, btn=document.getElementById('theme');
+  try{var s=localStorage.getItem('vp-theme'); if(s) root.setAttribute('data-theme',s);}catch(e){}
+  if(!btn) return;
+  function lbl(){var d=root.getAttribute('data-theme')==='dark'; btn.setAttribute('aria-label',d?'Switch to light theme':'Switch to dark theme');}
+  lbl();
+  function toggle(){var d=root.getAttribute('data-theme')==='dark',n=d?'light':'dark'; root.setAttribute('data-theme',n); try{localStorage.setItem('vp-theme',n);}catch(e){} lbl();}
+  btn.addEventListener('click',toggle);
+  document.addEventListener('keydown',function(e){ if((e.key==='t'||e.key==='T')&&!/input|textarea/i.test(e.target.tagName)) toggle(); });
+})();
+
+(function(){ /* MOBILE MENU */
+  var nav=document.getElementById('nav'), ham=document.getElementById('ham');
+  if(!nav||!ham) return;
+  function set(o){nav.classList.toggle('open',o); ham.setAttribute('aria-expanded',o?'true':'false'); ham.setAttribute('aria-label',o?'Close menu':'Open menu');}
+  ham.addEventListener('click',function(e){e.stopPropagation(); set(!nav.classList.contains('open'));});
+  document.addEventListener('click',function(e){ if(nav.classList.contains('open')&&!nav.contains(e.target)) set(false); });
+  nav.querySelectorAll('.nav__panel a').forEach(function(a){a.addEventListener('click',function(){set(false);});});
+})();
+
+(function(){ /* SCROLL PROGRESS + ACTIVE SECTION */
+  var bar=document.getElementById('progress');
+  var links=[].slice.call(document.querySelectorAll('.nav__panel a[href^="#"]'));
+  var secs=links.map(function(l){return document.querySelector(l.getAttribute('href'));}).filter(Boolean);
+  function onScroll(){
+    if(bar){var st=window.scrollY,h=document.documentElement.scrollHeight-window.innerHeight; bar.style.width=(h>0?st/h*100:0)+'%';}
+    if(!secs.length) return;
+    var cur=null; secs.forEach(function(s){ if(s.getBoundingClientRect().top<=120) cur=s; });
+    links.forEach(function(l){l.removeAttribute('aria-current');});
+    if(cur){var a=links.find(function(l){return l.getAttribute('href')==='#'+cur.id;}); if(a)a.setAttribute('aria-current','true');}
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); window.addEventListener('load',onScroll);
+})();
+
+(function(){ /* REVEAL ON SCROLL */
+  var els=document.querySelectorAll('.reveal');
+  if(!els.length) return;
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');}); return;}
+  var io=new IntersectionObserver(function(en){en.forEach(function(x){ if(x.isIntersecting){x.target.classList.add('in'); io.unobserve(x.target);} });},{threshold:.12});
+  els.forEach(function(e){io.observe(e);});
+})();
+
+(function(){ /* ACCORDION */
+  document.querySelectorAll('.acc__btn').forEach(function(btn){
+    var panel=document.getElementById(btn.getAttribute('aria-controls')); if(!panel) return;
+    btn.addEventListener('click',function(){
+      var open=btn.getAttribute('aria-expanded')==='true';
+      btn.setAttribute('aria-expanded', open?'false':'true');
+      panel.style.maxHeight = open ? '0' : (panel.scrollHeight+40)+'px';
+    });
+  });
+})();
+
+(function(){ /* YEAR */
+  var y=document.getElementById('yr'); if(y) y.textContent=new Date().getFullYear();
+  window.addEventListener('load',function(){document.body.classList.add('ready');});
+})();
+
+(function(){ /* BACKGROUND — subtle grayscale dot grid, cursor-reactive */
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var coarse=window.matchMedia('(pointer: coarse)').matches;
+  var canvas=document.getElementById('grid'); if(!canvas) return;
+  var ctx=canvas.getContext('2d');
+  if(coarse){ canvas.style.display='none'; return; }
+  var W=0,H=0,dpr=1, mx=-9999,my=-9999, cx=-9999,cy=-9999, step=26, radius=200, fade=240;
+  function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
+  var dotRGB,dotBase,dotGlow,crossRGB;
+  function readColors(){var d=css('--dot').match(/rgba?\(([^)]+)\)/); dotRGB=d?d[1].split(',').slice(0,3).map(Number):[243,243,233];
+    dotBase=parseFloat(css('--dot-base'))||.05; dotGlow=parseFloat(css('--dot-glow'))||.20; crossRGB=css('--cross').split(',').map(Number);}
+  function resize(){dpr=Math.min(window.devicePixelRatio||1,2);W=innerWidth;H=innerHeight;canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);}
+  function draw(){ctx.clearRect(0,0,W,H);var r=dotRGB[0],g=dotRGB[1],b=dotRGB[2];
+    for(var y=0;y<=H;y+=step){for(var x=0;x<=W;x+=step){var a=dotBase,rad=0.9;
+      if(cx>-5000&&!reduce){var dd=Math.hypot(x-cx,y-cy);if(dd<radius){var t=1-dd/radius;a=dotBase+(dotGlow-dotBase)*t*t;rad=0.9+t*0.7;}}
+      ctx.fillStyle='rgba('+r+','+g+','+b+','+a.toFixed(3)+')';ctx.beginPath();ctx.arc(x,y,rad,0,6.2832);ctx.fill();}}
+    if(cx>-5000&&!reduce){var cr=crossRGB[0],cg=crossRGB[1],cb=crossRGB[2];
+      var gh=ctx.createLinearGradient(cx-fade,0,cx+fade,0);gh.addColorStop(0,'rgba('+cr+','+cg+','+cb+',0)');gh.addColorStop(.5,'rgba('+cr+','+cg+','+cb+',0.10)');gh.addColorStop(1,'rgba('+cr+','+cg+','+cb+',0)');
+      ctx.strokeStyle=gh;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(cx-fade,cy+0.5);ctx.lineTo(cx+fade,cy+0.5);ctx.stroke();
+      var gv=ctx.createLinearGradient(0,cy-fade,0,cy+fade);gv.addColorStop(0,'rgba('+cr+','+cg+','+cb+',0)');gv.addColorStop(.5,'rgba('+cr+','+cg+','+cb+',0.10)');gv.addColorStop(1,'rgba('+cr+','+cg+','+cb+',0)');
+      ctx.strokeStyle=gv;ctx.beginPath();ctx.moveTo(cx+0.5,cy-fade);ctx.lineTo(cx+0.5,cy+fade);ctx.stroke();}}
+  var raf=null;
+  function tick(){cx+=(mx-cx)*0.18;cy+=(my-cy)*0.18;draw();if(Math.abs(mx-cx)>0.4||Math.abs(my-cy)>0.4){raf=requestAnimationFrame(tick);}else{raf=null;draw();}}
+  function kick(){if(raf===null)raf=requestAnimationFrame(tick);}
+  window.addEventListener('resize',function(){resize();draw();});
+  window.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;kick();});
+  window.addEventListener('mouseleave',function(){mx=-9999;my=-9999;kick();});
+  new MutationObserver(function(){readColors();draw();}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  resize();readColors();draw();
+})();
+
+</script>
+</body>
+</html>
