@@ -5,12 +5,27 @@
 
   var topImg = slider.querySelector('.photo-slider__top');
   var handle = slider.querySelector('.photo-slider__handle');
+  var rgbTag = slider.querySelector('.slider-tag[data-tag="RGB"]');
+  var depthTag = slider.querySelector('.slider-tag[data-tag="Depth"]');
   var animFrame = null;
+
+  function updateTagVisibility(pct) {
+    var sliderW = slider.offsetWidth;
+    var handleX = sliderW * pct / 100;
+    var pad = 8;
+
+    var rgbW = rgbTag.offsetWidth;
+    rgbTag.classList.toggle('slider-tag--hidden', !(pad + rgbW + pad < handleX));
+
+    var depthW = depthTag.offsetWidth;
+    depthTag.classList.toggle('slider-tag--hidden', !(handleX < sliderW - pad - depthW - pad));
+  }
 
   function setPositionPct(pct) {
     pct = Math.max(0, Math.min(100, pct));
     topImg.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
     handle.style.left = pct + '%';
+    updateTagVisibility(pct);
   }
 
   function setPosition(x) {
@@ -146,7 +161,9 @@ var TAG_COLORS = {
   Controls:           '#c95a55',
   CAD:                '#888888',
   'Mechanical Design':'#6a8ab8',
-  Manufacturing:      '#b88a50'
+  Manufacturing:      '#b88a50',
+  RGB:                '#ffffff',
+  Depth:              '#4169e1'
 };
 
 function initTags() {
