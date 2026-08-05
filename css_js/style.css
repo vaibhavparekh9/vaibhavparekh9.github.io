@@ -63,7 +63,8 @@ a {
   display: inline-block;
 }
 
-.nav-bar__right > a:hover {
+.nav-bar__right > a:hover,
+.nav-bar__icon-row a:hover {
   opacity: 0.6;
 }
 
@@ -87,6 +88,10 @@ a {
 
 .nav-bar__icon-row {
   display: contents;
+}
+
+.nav-bar__icon-row a {
+  transition: opacity 0.2s;
 }
 
 /* ---------- Main content area ---------- */
