@@ -13,7 +13,7 @@ F1-Tenth is a 1/10th scale autonomous racing platform. Map-based methods leverag
 
 ---
 
-## Spotlight: Our 3 Winning Races
+## Spotlight: Our 3 Winning Races 🏆
 
 <div style="display:flex;gap:1rem">
 <video src="../f1tenth_reactive/images/race-1.mp4" autoplay loop muted playsinline style="flex:1;min-width:0;border-radius:5px"></video>

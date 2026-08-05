@@ -91,6 +91,7 @@ a {
 }
 
 .nav-bar__icon-row a {
+  padding: 0.25rem 0;
   transition: opacity 0.2s;
 }
 
