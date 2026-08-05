@@ -5,12 +5,27 @@
 
   var topImg = slider.querySelector('.photo-slider__top');
   var handle = slider.querySelector('.photo-slider__handle');
+  var rgbTag = slider.querySelector('.slider-tag[data-tag="RGB"]');
+  var depthTag = slider.querySelector('.slider-tag[data-tag="Depth"]');
   var animFrame = null;
+
+  function updateTagVisibility(pct) {
+    var sliderW = slider.offsetWidth;
+    var handleX = sliderW * pct / 100;
+    var pad = 8;
+
+    var rgbW = rgbTag.offsetWidth;
+    rgbTag.classList.toggle('slider-tag--hidden', !(pad + rgbW + pad < handleX));
+
+    var depthW = depthTag.offsetWidth;
+    depthTag.classList.toggle('slider-tag--hidden', !(handleX < sliderW - pad - depthW - pad));
+  }
 
   function setPositionPct(pct) {
     pct = Math.max(0, Math.min(100, pct));
     topImg.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
     handle.style.left = pct + '%';
+    updateTagVisibility(pct);
   }
 
   function setPosition(x) {
@@ -98,21 +113,24 @@
 
 /* ---------- Project tag colors ---------- */
 var TAG_COLORS = {
-  'Computer Vision':  '#a8d8ea',
-  Learning:           '#d5a6e6',
-  Navigation:         '#a8e6cf',
-  SLAM:               '#f9d89c',
-  Controls:           '#f4a7a3',
-  CAD:                '#c8c8c8',
-  'Mechanical Design':'#b8c9e8',
-  Manufacturing:      '#e8c4a0'
+  'Computer Vision':  '#4a9cb8',
+  Learning:           '#9b5eb8',
+  Navigation:         '#4aab7a',
+  SLAM:               '#c9a035',
+  Controls:           '#c95a55',
+  CAD:                '#888888',
+  'Mechanical Design':'#6a8ab8',
+  Manufacturing:      '#b88a50',
+  RGB:                '#ffffff',
+  Depth:              '#4169e1'
 };
 
 function initTags() {
   document.querySelectorAll('.proj-tag').forEach(function(el) {
     var key = el.getAttribute('data-tag');
     if (key && TAG_COLORS[key]) {
-      el.style.backgroundColor = TAG_COLORS[key];
+      el.style.color = TAG_COLORS[key];
+      el.style.borderColor = TAG_COLORS[key];
     }
   });
 }
@@ -148,6 +166,21 @@ window.addEventListener('load', initTags);
       setOpen(false);
     });
   });
+})();
+
+/* ---------- Scroll progress bar ---------- */
+(function() {
+  var bar = document.querySelector('.scroll-progress');
+  if (!bar) return;
+
+  function update() {
+    var st = window.scrollY;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? st / h * 100 : 0) + '%';
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('load', update);
 })();
 
 /* ---------- Animated project card borders ---------- */
