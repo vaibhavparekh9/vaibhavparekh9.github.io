@@ -216,6 +216,24 @@ window.addEventListener('resize', function() {
   if (document.querySelector('.proj-card')) initBorders();
 });
 
+/* ---------- Lazy video play/pause on scroll ---------- */
+(function() {
+  var videos = document.querySelectorAll('video[preload="none"]');
+  if (!videos.length) return;
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.play();
+      } else {
+        entry.target.pause();
+      }
+    });
+  }, { threshold: 0 });
+
+  videos.forEach(function(v) { observer.observe(v); });
+})();
+
 /* ---------- Active nav link on scroll ---------- */
 (function() {
   var navLinks = document.querySelectorAll('.nav-bar__right > a.nav-bar__text-link');
