@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;600;700&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css_js/style.css">
+  <link rel="stylesheet" href="css_js/timeline.css">
   <link rel="stylesheet" href="css_js/gridTrail.css">
 </head>
 <body>
@@ -73,57 +74,74 @@
     <div class="timeline-section">
       <div class="timeline-container">
         <div class="timeline-dash-cap"></div>
-        <div class="timeline-node top">
+        <div class="timeline-node top" data-node="undergrad">
           <div class="timeline-content">
             <span class="timeline-date">05/2022</span>
-            Undergrad in MechE concluded
+            Undergrad in MechE concluded <span class="timeline-arrow">↗</span>
           </div>
-          <div class="timeline-dot"></div>
+          <div class="timeline-logo-wrap"><img class="timeline-logo" src="timeline_logos/mumbai_university.png" alt="Mumbai University"></div>
         </div>
-        <div class="timeline-node bottom">
-          <div class="timeline-dot"></div>
+        <div class="timeline-node bottom" data-node="tprel">
+          <div class="timeline-logo-wrap"><img class="timeline-logo" src="timeline_logos/tprel.png" alt="Tata Power Renewables"></div>
           <div class="timeline-content">
             <span class="timeline-date">06/2022</span>
-            Joined Tata Power Renewables
+            Joined Tata Power Renewables <span class="timeline-arrow">↗</span>
           </div>
         </div>
-        <div class="timeline-node top">
+        <div class="timeline-node top" data-node="cmu-start">
           <div class="timeline-content">
             <span class="timeline-date">08/2024</span>
-            Started Master's @ CMU
+            Started Master's @ CMU <span class="timeline-arrow">↗</span>
           </div>
-          <div class="timeline-dot"></div>
+          <div class="timeline-logo-wrap"><img class="timeline-logo" src="timeline_logos/cmu.png" alt="CMU"></div>
         </div>
-        <div class="timeline-node bottom">
-          <div class="timeline-dot"></div>
+        <div class="timeline-node bottom" data-node="cerlab">
+          <div class="timeline-logo-wrap"><img class="timeline-logo" src="timeline_logos/cerlab.png" alt="CERLAB"></div>
           <div class="timeline-content">
             <span class="timeline-date">10/2024</span>
-            Joined CERLAB
+            Joined CERLAB <span class="timeline-arrow">↗</span>
           </div>
         </div>
-        <div class="timeline-node top">
+        <div class="timeline-node top" data-node="ir">
           <div class="timeline-content">
             <span class="timeline-date">07/2025</span>
-            Intern @ Inductive Robotics
+            Intern @ Inductive Robotics <span class="timeline-arrow">↗</span>
           </div>
-          <div class="timeline-dot"></div>
+          <div class="timeline-logo-wrap"><img class="timeline-logo" src="timeline_logos/ir.jpeg" alt="Inductive Robotics"></div>
         </div>
-        <div class="timeline-node bottom">
-          <div class="timeline-dot"></div>
+        <div class="timeline-node bottom" data-node="lightspeed">
+          <div class="timeline-logo-wrap"><img class="timeline-logo" src="timeline_logos/lightspeed.png" alt="Lightspeed Robotics"></div>
           <div class="timeline-content">
             <span class="timeline-date">09/2025</span>
-            Intern @ Lightspeed Robotics
+            Intern @ Lightspeed Robotics <span class="timeline-arrow">↗</span>
           </div>
         </div>
-        <div class="timeline-node top">
+        <div class="timeline-node top" data-node="cmu-end">
           <div class="timeline-content">
             <span class="timeline-date">05/2026</span>
-            Master's @ CMU concludes 🎓
+            Master's @ CMU concludes 🎓 <span class="timeline-arrow">↗</span>
           </div>
-          <div class="timeline-dot"></div>
+          <div class="timeline-logo-wrap"><img class="timeline-logo" src="timeline_logos/cmu.png" alt="CMU"></div>
+        </div>
+        <div class="timeline-node bottom" data-node="forge">
+          <div class="timeline-logo-wrap"><img class="timeline-logo" src="timeline_logos/forge.png" alt="Forge Lab"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">07/2026</span>
+            Researcher @ Forge Lab <span class="timeline-arrow">↗</span>
+          </div>
         </div>
         <div class="timeline-dash-cap"></div>
       </div>
+    </div>
+
+    <div class="timeline-overlay"></div>
+    <div class="timeline-popup">
+      <button class="timeline-popup__close" aria-label="Close">✕</button>
+      <div class="timeline-popup__header">
+        <img class="timeline-popup__logo" src="" alt="">
+        <span class="timeline-popup__org"></span>
+      </div>
+      <div class="timeline-popup__body"></div>
     </div>
 
     <!-- Research and Projects section -->
@@ -270,6 +288,7 @@
 
   <script src="css_js/gridTrail.js"></script>
   <script src="css_js/main.js"></script>
+  <script src="css_js/timeline.js"></script>
 
 </body>
 </html>

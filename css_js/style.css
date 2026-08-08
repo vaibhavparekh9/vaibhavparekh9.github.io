@@ -234,80 +234,7 @@ a {
   transition: width 0.1s linear;
 }
 
-/* ---------- Timeline ---------- */
-.timeline-section {
-  margin: 1rem 0;
-}
-
-.timeline-container {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-height: 150px;
-}
-
-.timeline-container::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: #2b2b2b;
-  transform: translateY(-50%);
-  z-index: 1;
-}
-
-.timeline-dash-cap {
-  position: relative;
-  z-index: 2;
-  width: clamp(20px, 4vw, 60px);
-  height: 1px;
-  flex-shrink: 0;
-  border-top: 1px dashed #b2b2b2;
-  background: #fff;
-}
-
-.timeline-node {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
-}
-
-.timeline-dot {
-  width: 8px;
-  height: 8px;
-  background: #fff;
-  border: 1.5px solid #2b2b2b;
-}
-
-.timeline-content {
-  position: absolute;
-  text-align: center;
-  white-space: nowrap;
-  font-size: clamp(0.7rem, 0.85vw, 0.9rem);
-  line-height: 1.4;
-  color: #c41230;
-}
-
-.timeline-node.top .timeline-content {
-  bottom: 22px;
-}
-
-.timeline-node.bottom .timeline-content {
-  top: 22px;
-}
-
-.timeline-date {
-  display: block;
-  font-weight: 700;
-  color: #b2b2b2;
-  margin-bottom: 2px;
-}
+/* Timeline styles are in css_js/timeline.css */
 
 /* ---------- Section heading ---------- */
 .section-heading {
@@ -575,19 +502,7 @@ a {
     font-size: 1rem;
   }
 
-  /* -- Timeline: horizontal scroll -- */
-  .timeline-section {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin-left: -5%;
-    margin-right: -5%;
-    padding-left: 5%;
-    padding-right: 5%;
-  }
-
-  .timeline-container {
-    min-width: 700px;
-  }
+  /* Timeline mobile overrides are in css_js/timeline.css */
 
   /* -- Project cards: image on top, text below -- */
   .projects-grid {
