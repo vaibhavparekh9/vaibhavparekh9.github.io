@@ -127,6 +127,7 @@ var TIMELINE_DATA = {
   function closePopup() {
     popup.classList.remove('active');
     overlay.classList.remove('active');
+    document.body.style.overflow = '';
   }
 
   function openPopup(nodeEl) {
@@ -157,24 +158,9 @@ var TIMELINE_DATA = {
     });
     bodyEl.innerHTML = html;
 
+    document.body.style.overflow = 'hidden';
     overlay.classList.add('active');
     popup.classList.add('active');
-
-    var rect = nodeEl.getBoundingClientRect();
-    var vw = window.innerWidth;
-    var popupW = 340;
-    var topY = rect.top + window.scrollY;
-
-    if (rect.left < vw / 2) {
-      popup.style.left = Math.min(rect.right + 16, vw - popupW - 16) + 'px';
-      popup.style.right = 'auto';
-    } else {
-      popup.style.left = Math.max(rect.left - popupW - 16, 16) + 'px';
-      popup.style.right = 'auto';
-    }
-
-    popup.style.top = Math.max(topY - 40, 80) + 'px';
-    popup.style.transform = 'none';
   }
 
   document.querySelectorAll('.timeline-node[data-node]').forEach(function(node) {
