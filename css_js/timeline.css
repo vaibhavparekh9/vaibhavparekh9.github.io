@@ -119,6 +119,26 @@
   border-radius: 4px;
   background: #fff;
   border: 1px solid rgba(196, 18, 48, 0.3);
+  transition: transform 0.25s ease;
+}
+
+/* ---------- Node hover effects ---------- */
+.timeline-node:hover .timeline-logo {
+  transform: translateY(-3px) scale(1.35);
+}
+
+.timeline-node:hover .timeline-logo-wrap::before,
+.timeline-node:hover .timeline-logo-wrap::after {
+  animation: none;
+  opacity: 0;
+}
+
+.timeline-node:hover .timeline-content {
+  font-weight: 700;
+}
+
+.timeline-node:hover .timeline-content .timeline-date {
+  font-weight: 700;
 }
 
 /* ---------- Overlay ---------- */
