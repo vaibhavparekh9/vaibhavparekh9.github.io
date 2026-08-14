@@ -23,16 +23,6 @@
   z-index: 1;
 }
 
-.timeline-dash-cap {
-  position: relative;
-  z-index: 2;
-  width: clamp(20px, 4vw, 60px);
-  height: 1px;
-  flex-shrink: 0;
-  border-top: 1px dashed #b2b2b2;
-  background: #fff;
-}
-
 /* ---------- Timeline nodes ---------- */
 .timeline-node {
   position: relative;
@@ -74,40 +64,12 @@
   opacity: 0.5;
 }
 
-/* ---------- Logo with pulsating solid layers ---------- */
+/* ---------- Logo ---------- */
 .timeline-logo-wrap {
   position: relative;
   width: 40px;
   height: 40px;
   flex-shrink: 0;
-}
-
-.timeline-logo-wrap::before,
-.timeline-logo-wrap::after {
-  content: '';
-  position: absolute;
-  border-radius: 6px;
-  z-index: -1;
-  animation: timeline-layer-pulse 2.5s ease-in-out infinite;
-}
-
-/* outer layer (lightest) */
-.timeline-logo-wrap::before {
-  inset: -8px;
-  background: rgba(196, 18, 48, 0.06);
-  animation-delay: 0.15s;
-}
-
-/* middle layer */
-.timeline-logo-wrap::after {
-  inset: -4px;
-  background: rgba(196, 18, 48, 0.14);
-}
-
-@keyframes timeline-layer-pulse {
-  0%   { opacity: 0.8; transform: scale(1); }
-  70%  { opacity: 0;   transform: scale(1.3); }
-  100% { opacity: 0;   transform: scale(1.3); }
 }
 
 .timeline-logo {
@@ -118,26 +80,17 @@
   object-fit: contain;
   border-radius: 4px;
   background: #fff;
-  border: 1px solid rgba(196, 18, 48, 0.3);
-  transition: transform 0.25s ease;
+  border: 1px solid #e0e0e0;
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-/* ---------- Node hover effects ---------- */
-.timeline-node:hover .timeline-logo {
+/* ---------- Raised state (JS loop + hover) ---------- */
+.timeline-node.raised .timeline-logo {
   transform: translateY(-3px) scale(1.35);
+  border-color: rgba(196, 18, 48, 0.3);
 }
 
-.timeline-node:hover .timeline-logo-wrap::before,
-.timeline-node:hover .timeline-logo-wrap::after {
-  animation: none;
-  opacity: 0;
-}
-
-.timeline-node:hover .timeline-content {
-  font-weight: 700;
-}
-
-.timeline-node:hover .timeline-content .timeline-date {
+.timeline-node.raised .timeline-content {
   font-weight: 700;
 }
 

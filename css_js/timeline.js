@@ -20,12 +20,20 @@ var TIMELINE_DATA = {
       {
         dates: 'Jun 2022 – Jun 2023',
         title: 'Lead Associate',
-        desc: 'Worked on utility-scale solar plant operations. Gained industry experience in energy systems, data-driven maintenance scheduling, and large-scale project coordination before transitioning to graduate studies in robotics.'
+        desc: '• Performed financial and energy modeling using Plexos and Excel to integrate over 6 GW of energy from wind, solar, and ESS, optimizing generation capacities for RTC (Round-the-Clock) and FDRE (Firm and Dispatchable Renewable Energy) tenders to meet DISCOM requirements.' +
+          '<br>• Led bid management for a 225 MW wind-solar hybrid project (150 MW + 75 MW greenshoe option), owning financial modeling and tariff strategy from pre-bid through PPA execution. Represented TPREL in multiple utility-scale auctions.' +
+          '<br>• Led renewable capacity design for a green hydrogen plant requiring 24x7 firm supply, optimizing the wind-solar-ESS mix against state renewable energy policy, and factoring in open-market sale of surplus generation.' +
+          '<br>• Analyzed repowering potential across ageing wind sites in Maharashtra, mapping turbine capacities nearing end-of-life against available land parcels. Built the cost-benefit case for replacing legacy turbines with modern high-capacity units and rerouting the uprated capacity to existing and new offtake projects.' +
+          '<br><br><strong>Beyond my scope, I:</strong>' +
+          '<br>• Remodeled financial/energy modeling workflows using a SciPy-based solver, reducing modeling time compared to Plexos and overcoming convergence challenges to achieve minimum LCOE (Levelized Cost of Energy) in Excel.' +
+          '<br>• Fine-tuned a GPT-3.5 model for summarizing/comparing lengthy Proposal Request documents and assessing risks, reducing TAT for tender analysis from hours to minutes.'
       },
       {
         dates: 'Jun 2023 – Aug 2024',
         title: 'Graduate Engineer Trainee',
-        desc: 'Worked on utility-scale solar plant operations. Gained industry experience in energy systems, data-driven maintenance scheduling, and large-scale project coordination before transitioning to graduate studies in robotics.'
+        desc: '• Erected and commissioned 3 solar projects totaling 375 MW, helping organizations meet their renewable energy obligations.' +
+          '<br>• Conducted testing on mechanical/civil structures and heavy electrical equipment to ensure first-time-right quality and reliability.' +
+          '<br>• Planned daily project workflow and managed resource allocation, minimizing downtime for efficient on-site project execution.'
       }
     ]
   },
@@ -37,7 +45,7 @@ var TIMELINE_DATA = {
       {
         dates: 'Aug 2024 – May 2026',
         title: 'Robotics, Mechanical Engineering',
-        desc: 'Focused on perception, navigation, SLAM, and deep learning for robotics.'
+        desc: 'Honed skills as a Robotics Engineer: perception, navigation, SLAM, deep learning, autonomous vehicles, controls, and simulation.'
       }
     ]
   },
@@ -49,7 +57,8 @@ var TIMELINE_DATA = {
       {
         dates: 'Oct 2024 – May 2026',
         title: 'Graduate Research Assistant',
-        desc: 'Conducted Master\'s thesis research on extending unsupervised landmark discovery from 2D frontal datasets to multi-viewpoint objects using DVE, LiDAR depth correspondences, and visibility-aware loss normalization.'
+        desc: 'Worked in Perception and Front-end SLAM.' +
+          '<br><strong>Thesis:</strong> <a href="https://vaibhavparekh9.github.io/projects/projects.html?p=unsupervised_keypoint_detection" target="_blank" rel="noopener">Extending Unsupervised Landmark Discovery to Multi-Viewpoint Objects.</a>'
       }
     ]
   },
@@ -61,7 +70,9 @@ var TIMELINE_DATA = {
       {
         dates: 'Jul 2025 – Aug 2025',
         title: 'Robotics Intern',
-        desc: 'Summer internship focused on robotic perception and autonomy. Worked on sensor integration and real-time planning systems for mobile robot platforms.'
+        desc: '• Developed ROS2-based perception and navigation stack for docking a Clearpath Jackal-based robot to an inductive charger, and simulated the same in Nvidia Isaac Sim.' +
+          '<br>• Generated synthetic dataset in Isaac Sim using Replicator and trained a YOLOv11 model for preemptive detection of reversing vehicles through taillight-state classification, achieving 92% accuracy on real-world data through effective sim-to-real transfer using domain randomization.' +
+          '<br>• Modeled the comprehensive robot in SolidWorks and authored its URDF, along with the sim environment and assets in Blender.'
       }
     ]
   },
@@ -73,7 +84,9 @@ var TIMELINE_DATA = {
       {
         dates: 'Sep 2025 – Dec 2025',
         title: 'Robotics Intern',
-        desc: 'Worked on high-speed autonomous navigation and control systems. Contributed to perception pipeline development and real-world testing of robotic platforms.'
+        desc: '• Built an LLM-based parser for BTLx (XML schema for timber fabrication) to translate design data into robotic panel-cutting instructions, enabling AI-driven construction automation.' +
+          '<br>• Curated datasets and developed the perception stack for BRUTE robot (a stationary dual-arm cell for panel construction) for detecting processed lumber at the cutting station.' +
+          '<br>• Developed ROS2 based navigation (Nav2) and manipulation (MoveIt) stacks for DEX robot (a mobile dual-arm manipulator), with simulations in Nvidia Isaac Sim.'
       }
     ]
   },
@@ -100,7 +113,7 @@ var TIMELINE_DATA = {
     ]
   },
   forge: {
-    org: 'FORGE Lab',
+    org: 'FORGE Lab, Carnegie Mellon University',
     url: 'https://forgelab-cmu.com/',
     logo: 'timeline_logos/forge.png',
     entries: [
@@ -113,17 +126,67 @@ var TIMELINE_DATA = {
   }
 };
 
-/* ---------- Popup logic ---------- */
+/* ---------- Raise-cycle + Popup logic ---------- */
 (function() {
+  /* ---- tweakable ---- */
+  var RAISE_DURATION_MS = 1200;
+
+  /* ---- elements ---- */
+  var nodes = Array.prototype.slice.call(
+    document.querySelectorAll('.timeline-node[data-node]')
+  );
   var overlay = document.querySelector('.timeline-overlay');
   var popup = document.querySelector('.timeline-popup');
-  if (!overlay || !popup) return;
+  if (!overlay || !popup || nodes.length === 0) return;
 
   var closeBtn = popup.querySelector('.timeline-popup__close');
-  var logoEl = popup.querySelector('.timeline-popup__logo');
-  var orgEl = popup.querySelector('.timeline-popup__org');
   var bodyEl = popup.querySelector('.timeline-popup__body');
 
+  /* ---- raise cycle ---- */
+  var cycleIndex = 0;
+  var cycleTimer = null;
+  var hovered = false;
+
+  function clearRaised() {
+    nodes.forEach(function(n) { n.classList.remove('raised'); });
+  }
+
+  function raiseNext() {
+    clearRaised();
+    nodes[cycleIndex].classList.add('raised');
+    cycleIndex = (cycleIndex + 1) % nodes.length;
+  }
+
+  function startCycle() {
+    stopCycle();
+    raiseNext();
+    cycleTimer = setInterval(raiseNext, RAISE_DURATION_MS);
+  }
+
+  function stopCycle() {
+    if (cycleTimer) { clearInterval(cycleTimer); cycleTimer = null; }
+  }
+
+  startCycle();
+
+  /* ---- hover ---- */
+  nodes.forEach(function(node) {
+    node.addEventListener('mouseenter', function() {
+      hovered = true;
+      stopCycle();
+      clearRaised();
+      node.classList.add('raised');
+    });
+
+    node.addEventListener('mouseleave', function() {
+      hovered = false;
+      node.classList.remove('raised');
+      cycleIndex = 0;
+      startCycle();
+    });
+  });
+
+  /* ---- popup ---- */
   function closePopup() {
     popup.classList.remove('active');
     overlay.classList.remove('active');
@@ -134,9 +197,6 @@ var TIMELINE_DATA = {
     var key = nodeEl.getAttribute('data-node');
     var data = TIMELINE_DATA[key];
     if (!data) return;
-
-    logoEl.src = data.logo;
-    logoEl.alt = data.org;
 
     var headerEl = popup.querySelector('.timeline-popup__header');
     if (data.url) {
@@ -163,7 +223,7 @@ var TIMELINE_DATA = {
     popup.classList.add('active');
   }
 
-  document.querySelectorAll('.timeline-node[data-node]').forEach(function(node) {
+  nodes.forEach(function(node) {
     node.addEventListener('click', function(e) {
       e.stopPropagation();
       openPopup(node);
