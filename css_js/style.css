@@ -236,7 +236,8 @@ a {
   text-decoration: none;
 }
 
-.intro__text a:hover .cmu-red {
+.intro__text a .cmu-red {
+  font-family: "IBM Plex Serif", serif;
   text-decoration: underline;
 }
 
