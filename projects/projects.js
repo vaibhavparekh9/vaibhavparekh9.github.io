@@ -234,3 +234,21 @@ function parseContent(src) {
   mathStore.forEach(function(m, i) { html = html.replace('<p>%%MATH' + i + '%%</p>', m); html = html.replace('%%MATH' + i + '%%', m); });
   return html;
 }
+
+/* ---------- Go-to-top button ---------- */
+(function() {
+  var btn = document.querySelector('.go-top');
+  if (!btn) return;
+
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  });
+
+  btn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
