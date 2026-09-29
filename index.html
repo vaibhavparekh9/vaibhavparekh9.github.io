@@ -11,6 +11,14 @@
   <link rel="stylesheet" href="css_js/style.css">
   <link rel="stylesheet" href="css_js/timeline.css">
   <link rel="stylesheet" href="css_js/gridTrail.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -49,12 +57,9 @@
   <!-- Introduction section -->
   <main class="content">
     <section class="intro">
-      <div class="photo-slider">
-        <img class="photo-slider__img" src="profile_picture_depth.jpg" alt="Vaibhav Parekh (depth)">
-        <img class="photo-slider__img photo-slider__top" src="profile_picture.jpg" alt="Vaibhav Parekh">
-        <div class="photo-slider__handle"><span class="photo-slider__arrows"><span>&#x2039;</span><span>&#x203a;</span></span></div>
-        <span class="slider-tag proj-tag" data-tag="RGB">RGB</span>
-        <span class="slider-tag proj-tag" data-tag="Depth">Depth</span>
+      <div class="profile-pic">
+        <img class="profile-pic__img" src="profile_picture.jpg" alt="Vaibhav Parekh">
+        <canvas class="profile-pic__canvas" id="pointcloud-canvas"></canvas>
       </div>
       <div class="intro__text">
         <h3 class="intro__greeting">Hi there! I am Vaibhav, and I build robots.</h3>
@@ -341,6 +346,7 @@
   <script src="css_js/gridTrail.js"></script>
   <script src="css_js/main.js"></script>
   <script src="css_js/timeline.js"></script>
+  <script type="module" src="css_js/pointcloud.js"></script>
 
 </body>
 </html>
